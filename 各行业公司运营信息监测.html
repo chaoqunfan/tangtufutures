@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<style type="text/css">
+
+
+
+.description {
+
+
+
+	font-family:"Microsoft YaHei";
+
+
+
+	/*font-weight:bold;*/
+
+
+
+	font-size:15px;
+
+
+
+	text-align: left; /*--@ center @--*/
+
+
+
+	padding-top: 10px;
+
+
+
+	padding-left: 10%;  /*--@ 20px @--*/
+
+
+
+}
+
+
+
+div.words {
+
+
+
+	color:#1d1d1d;
+
+
+
+	border-color: #b6b6b6;
+
+
+
+	border-width: 1px;
+
+
+
+	border-bottom-style: solid;
+
+
+
+}
+
+
+
+#main {
+
+
+
+	font-family: Arial,"Microsoft YaHei";
+
+
+
+	width:1800px;
+
+
+
+	height:800px;
+
+
+
+}
+
+
+
+</style>
+<title>农产品价格信息监测</title><script src="所有行业亏损程度.js"></script><script src="所有行业亏损占比.js"></script><script src="专业服务.js"></script><script src="中药.js"></script><script src="专用设备.js"></script><script src="珠宝首饰.js"></script><script src="装修装饰.js"></script><script src="综合行业.js"></script><script src="装修建材.js"></script><script src="证券.js"></script><script src="造纸印刷.js"></script><script src="游戏.js"></script><script src="医药商业.js"></script><script src="医疗器械.js"></script><script src="医疗服务.js"></script><script src="有色金属.js"></script><script src="银行.js"></script><script src="仪器仪表.js"></script><script src="消费电子.js"></script><script src="小金属.js"></script><script src="橡胶制品.js"></script><script src="文化传媒.js"></script><script src="物流行业.js"></script><script src="通信服务.js"></script><script src="通用设备.js"></script><script src="通信设备.js"></script><script src="铁路公路.js"></script><script src="生物制品.js"></script><script src="商业百货.js"></script><script src="石油行业.js"></script><script src="塑料制品.js"></script><script src="食品饮料.js"></script><script src="水泥建材.js"></script><script src="燃气.js"></script><script src="软件开发.js"></script><script src="汽车整车.js"></script><script src="汽车服务.js"></script><script src="汽车零部件.js"></script><script src="能源金属.js"></script><script src="农药兽药.js"></script><script src="酿酒行业.js"></script><script src="农牧饲渔.js"></script><script src="美容护理.js"></script><script src="贸易行业.js"></script><script src="煤炭行业.js"></script><script src="旅游酒店.js"></script><script src="教育.js"></script><script src="计算机设备.js"></script><script src="家电行业.js"></script><script src="家用轻工.js"></script><script src="交运设备.js"></script><script src="化学原料.js"></script><script src="化肥行业.js"></script><script src="环保行业.js"></script><script src="化学制品.js"></script><script src="航天航空.js"></script><script src="化纤行业.js"></script><script src="化学制药.js"></script><script src="航运港口.js"></script><script src="互联网服务.js"></script><script src="航空机场.js"></script><script src="光学光电子.js"></script><script src="光伏设备.js"></script><script src="工程机械.js"></script><script src="贵金属.js"></script><script src="工程咨询服务.js"></script><script src="钢铁行业.js"></script><script src="公用事业.js"></script><script src="工程建设.js"></script><script src="房地产服务.js"></script><script src="风电设备.js"></script><script src="非金属材料.js"></script><script src="房地产开发.js"></script><script src="纺织服装.js"></script><script src="电子化学品.js"></script><script src="电源设备.js"></script><script src="电池.js"></script><script src="电机.js"></script><script src="多元金融.js"></script><script src="电子元件.js"></script><script src="电网设备.js"></script><script src="电力行业.js"></script><script src="采掘行业.js"></script><script src="船舶制造.js"></script><script src="半导体.js"></script><script src="包装材料.js"></script><script src="玻璃玻纤.js"></script><script src="保险.js"></script>
+<!-- 引入 echarts.js -->
+<script crossorigin="anonymous" integrity="sha384-et+fqdf7kslHL5Ip8rXSJPUPODLa7eMfpFTBaCfnlMzrcAz/wxI5Xm/mNTZwd+7H" src="https://lib.baomitu.com/echarts/4.7.0/echarts.min.js"></script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<body>
+<div id="main"></div>
+<script type="text/javascript">
+
+
+
+		// 基于准备好的dom，初始化echarts实例
+
+
+
+      var myChart = echarts.init(document.getElementById('main'));
+
+
+
+      // 指定图表的配置项和数据
+
+
+
+      var option = {
+
+
+
+        title: {
+
+
+
+          text: '',
+
+
+
+        },
+
+
+
+        legend: {
+
+
+
+          orient: 'vertical',
+
+
+
+          right: 10,
+
+
+
+          top: 'center'
+
+
+
+        },
+
+
+
+        tooltip: {
+
+
+
+        trigger: 'axis',
+
+
+
+        axisPointer: {
+
+
+
+            type: 'shadow'
+
+
+
+        },
+
+
+
+        formatter: function (params) {
+
+
+
+          var result = params[0].name+"</br>";
+
+
+
+                    params.forEach(function (item) {
+
+
+
+                        result += item.marker + " " + item.seriesName + " : " + item.value +"</br>";
+
+
+
+                    });
+
+
+
+                    return result;
+
+
+
+        },
+
+
+
+        },
+
+
+
+        dataZoom:[
+
+
+
+          {
+
+
+
+            type: 'slider',
+
+
+
+            start: 0,
+
+
+
+            end: 100
+
+
+
+          },
+
+
+
+          {
+
+
+
+            type: 'inside',
+
+
+
+            start: 0,
+
+
+
+            end: 100
+
+
+
+          }
+
+
+
+        ],
+
+
+
+        xAxis: {
+
+
+
+          data: []
+
+
+
+        },
+
+
+
+        yAxis: {
+
+
+
+
+
+
+
+        }
+
+
+
+      };
+
+
+
+      // 使用刚指定的配置项和数据显示图表。
+
+
+
+      myChart.setOption(option);
+
+
+
+      //清空数据重建
+
+
+
+	  function clear_axis(){
+
+
+
+		myChart.clear();
+
+
+
+		option = {
+
+
+
+        title: {
+
+
+
+          text: '',
+
+
+
+        },
+
+
+
+        legend: {
+
+
+
+          orient: 'vertical',
+
+
+
+          right: 10,
+
+
+
+          top: 'center'
+
+
+
+        },
+
+
+
+        tooltip: {
+
+
+
+        trigger: 'axis',
+
+
+
+        axisPointer: {
+
+
+
+            type: 'shadow'
+
+
+
+        },
+
+
+
+        formatter: function (params) {
+
+
+
+          var result = params[0].name+"</br>";
+
+
+
+                    params.forEach(function (item) {
+
+
+
+                        result += item.marker + " " + item.seriesName + " : " + item.value +"</br>";
+
+
+
+                    });
+
+
+
+                    return result;
+
+
+
+        },
+
+
+
+        },
+
+
+
+        dataZoom:[
+
+
+
+          {
+
+
+
+            type: 'slider',
+
+
+
+            start: 0,
+
+
+
+            end: 100
+
+
+
+          },
+
+
+
+          {
+
+
+
+            type: 'inside',
+
+
+
+            start: 0,
+
+
+
+            end: 100
+
+
+
+          }
+
+
+
+        ],
+
+
+
+        xAxis: {
+
+
+
+          data: []
+
+
+
+        },
+
+
+
+        yAxis: {
+
+
+
+
+
+
+
+        }
+
+
+
+      };
+
+
+
+		myChart.setOption(option);
+
+
+
+	
+
+
+
+		
+
+
+
+		}
+
+
+
+		
+
+
+
+    </script>
+<span style="align-self: center;">
+<button onclick="clear_axis();baoxian()">保险</button><button onclick="clear_axis();boliboxian()">玻璃玻纤</button><button onclick="clear_axis();baozhuangcailiao()">包装材料</button><button onclick="clear_axis();bandaoti()">半导体</button><button onclick="clear_axis();chuanbozhizao()">船舶制造</button><button onclick="clear_axis();caijuehangye()">采掘行业</button><button onclick="clear_axis();dianlixingye()">电力行业</button><button onclick="clear_axis();dianwangshebei()">电网设备</button><button onclick="clear_axis();dianziyuanjian()">电子元件</button><button onclick="clear_axis();duoyuanjinrong()">多元金融</button><button onclick="clear_axis();dianji()">电机</button><button onclick="clear_axis();dianchi()">电池</button><button onclick="clear_axis();dianyuanshebei()">电源设备</button><button onclick="clear_axis();dianzihuaxuepin()">电子化学品</button><button onclick="clear_axis();fangzhifuzhuang()">纺织服装</button><button onclick="clear_axis();fangdichankaifa()">房地产开发</button><button onclick="clear_axis();feijinshucailiao()">非金属材料</button><button onclick="clear_axis();fengdianshebei()">风电设备</button><button onclick="clear_axis();fangdichanfuwu()">房地产服务</button><button onclick="clear_axis();gongchengjianshe()">工程建设</button><button onclick="clear_axis();gongyongshiye()">公用事业</button><button onclick="clear_axis();gangtiehangye()">钢铁行业</button><button onclick="clear_axis();gongchengzixunfuwu()">工程咨询服务</button><button onclick="clear_axis();guijinshu()">贵金属</button><button onclick="clear_axis();gongchengjixie()">工程机械</button><button onclick="clear_axis();guangfushebei()">光伏设备</button><button onclick="clear_axis();guangxueguangdianzi()">光学光电子</button><button onclick="clear_axis();hangkongjichang()">航空机场</button><button onclick="clear_axis();hulianwangfuwu()">互联网服务</button><button onclick="clear_axis();hangyungangkou()">航运港口</button><button onclick="clear_axis();huaxuezhiyao()">化学制药</button><button onclick="clear_axis();huaxianhangye()">化纤行业</button><button onclick="clear_axis();hangtianhangkong()">航天航空</button><button onclick="clear_axis();huaxuezhipin()">化学制品</button><button onclick="clear_axis();huanbaohangye()">环保行业</button><button onclick="clear_axis();huafeihangye()">化肥行业</button><button onclick="clear_axis();huaxueyuanliao()">化学原料</button><button onclick="clear_axis();jiaoyunshebei()">交运设备</button><button onclick="clear_axis();jiayongqinggong()">家用轻工</button><button onclick="clear_axis();jiadianhangye()">家电行业</button><button onclick="clear_axis();jisuanjishebei()">计算机设备</button><button onclick="clear_axis();jiaoyu()">教育</button><button onclick="clear_axis();lvyoujiudian()">旅游酒店</button><button onclick="clear_axis();meitanhangye()">煤炭行业</button><button onclick="clear_axis();maoyihangye()">贸易行业</button><button onclick="clear_axis();meironghuli()">美容护理</button><button onclick="clear_axis();nongmusiyu()">农牧饲渔</button><button onclick="clear_axis();niangjiuhangye()">酿酒行业</button><button onclick="clear_axis();nongyaoshouyao()">农药兽药</button><button onclick="clear_axis();nengyuanjinshu()">能源金属</button><button onclick="clear_axis();qichelingbujian()">汽车零部件</button><button onclick="clear_axis();qichefuwu()">汽车服务</button><button onclick="clear_axis();qichezhengche()">汽车整车</button><button onclick="clear_axis();ruanjiankaifa()">软件开发</button><button onclick="clear_axis();ranqi()">燃气</button><button onclick="clear_axis();shuinijiancai()">水泥建材</button><button onclick="clear_axis();shipinyinliao()">食品饮料</button><button onclick="clear_axis();suliaozhipin()">塑料制品</button><button onclick="clear_axis();shiyouhangye()">石油行业</button><button onclick="clear_axis();shangyebaihuo()">商业百货</button><button onclick="clear_axis();shengwuzhipin()">生物制品</button><button onclick="clear_axis();tielugonglu()">铁路公路</button><button onclick="clear_axis();tongxinshebei()">通信设备</button><button onclick="clear_axis();tongyongshebei()">通用设备</button><button onclick="clear_axis();tongxinfuwu()">通信服务</button><button onclick="clear_axis();wuliuxingye()">物流行业</button><button onclick="clear_axis();wenhuachuanmei()">文化传媒</button><button onclick="clear_axis();xiangjiaozhipin()">橡胶制品</button><button onclick="clear_axis();xiaojinshu()">小金属</button><button onclick="clear_axis();xiaofeidianzi()">消费电子</button><button onclick="clear_axis();yiqiyibiao()">仪器仪表</button><button onclick="clear_axis();yinhang()">银行</button><button onclick="clear_axis();yousejinshu()">有色金属</button><button onclick="clear_axis();yiliaofuwu()">医疗服务</button><button onclick="clear_axis();yiliaoqixie()">医疗器械</button><button onclick="clear_axis();yiyaoshangye()">医药商业</button><button onclick="clear_axis();youxi()">游戏</button><button onclick="clear_axis();zaozhiyinshua()">造纸印刷</button><button onclick="clear_axis();zhengquan()">证券</button><button onclick="clear_axis();zhuangxiujiancai()">装修建材</button><button onclick="clear_axis();zonghehangye()">综合行业</button><button onclick="clear_axis();zhuangxiuzhuangshi()">装修装饰</button><button onclick="clear_axis();zhubaoshoushi()">珠宝首饰</button><button onclick="clear_axis();zhuanyongshebei()">专用设备</button><button onclick="clear_axis();zhongyao()">中药</button><button onclick="clear_axis();zhuanyefuwu()">专业服务</button><button onclick="clear_axis();suoyouhangyekuisunzhanbi()">所有行业亏损占比</button><button onclick="clear_axis();suoyouhangyekuisunchengdu()">所有行业亏损程度</button></span>
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<style type="text/css">
+
+
+
+.description {
+
+
+
+	font-family:"Microsoft YaHei";
+
+
+
+	/*font-weight:bold;*/
+
+
+
+	font-size:15px;
+
+
+
+	text-align: left; /*--@ center @--*/
+
+
+
+	padding-top: 10px;
+
+
+
+	padding-left: 10%;  /*--@ 20px @--*/
+
+
+
+}
+
+
+
+div.words {
+
+
+
+	color:#1d1d1d;
+
+
+
+	border-color: #b6b6b6;
+
+
+
+	border-width: 1px;
+
+
+
+	border-bottom-style: solid;
+
+
+
+}
+
+
+
+#main {
+
+
+
+	font-family: Arial,"Microsoft YaHei";
+
+
+
+	width:1800px;
+
+
+
+	height:800px;
+
+
+
+}
+
+
+
+</style>
+<title>农产品价格信息监测</title>
+<!-- 引入 echarts.js -->
+<script crossorigin="anonymous" integrity="sha384-et+fqdf7kslHL5Ip8rXSJPUPODLa7eMfpFTBaCfnlMzrcAz/wxI5Xm/mNTZwd+7H" src="https://lib.baomitu.com/echarts/4.7.0/echarts.min.js"></script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<body>
+<div id="main"></div>
+<script type="text/javascript">
+
+
+
+		// 基于准备好的dom，初始化echarts实例
+
+
+
+      var myChart = echarts.init(document.getElementById('main'));
+
+
+
+      // 指定图表的配置项和数据
+
+
+
+      var option = {
+
+
+
+        title: {
+
+
+
+          text: '',
+
+
+
+        },
+
+
+
+        legend: {
+
+
+
+          orient: 'vertical',
+
+
+
+          right: 10,
+
+
+
+          top: 'center'
+
+
+
+        },
+
+
+
+        tooltip: {
+
+
+
+        trigger: 'axis',
+
+
+
+        axisPointer: {
+
+
+
+            type: 'shadow'
+
+
+
+        },
+
+
+
+        formatter: function (params) {
+
+
+
+          var result = params[0].name+"</br>";
+
+
+
+                    params.forEach(function (item) {
+
+
+
+                        result += item.marker + " " + item.seriesName + " : " + item.value +"</br>";
+
+
+
+                    });
+
+
+
+                    return result;
+
+
+
+        },
+
+
+
+        },
+
+
+
+        dataZoom:[
+
+
+
+          {
+
+
+
+            type: 'slider',
+
+
+
+            start: 0,
+
+
+
+            end: 100
+
+
+
+          },
+
+
+
+          {
+
+
+
+            type: 'inside',
+
+
+
+            start: 0,
+
+
+
+            end: 100
+
+
+
+          }
+
+
+
+        ],
+
+
+
+        xAxis: {
+
+
+
+          data: []
+
+
+
+        },
+
+
+
+        yAxis: {
+
+
+
+
+
+
+
+        }
+
+
+
+      };
+
+
+
+      // 使用刚指定的配置项和数据显示图表。
+
+
+
+      myChart.setOption(option);
+
+
+
+      //清空数据重建
+
+
+
+	  function clear_axis(){
+
+
+
+		myChart.clear();
+
+
+
+		option = {
+
+
+
+        title: {
+
+
+
+          text: '',
+
+
+
+        },
+
+
+
+        legend: {
+
+
+
+          orient: 'vertical',
+
+
+
+          right: 10,
+
+
+
+          top: 'center'
+
+
+
+        },
+
+
+
+        tooltip: {
+
+
+
+        trigger: 'axis',
+
+
+
+        axisPointer: {
+
+
+
+            type: 'shadow'
+
+
+
+        },
+
+
+
+        formatter: function (params) {
+
+
+
+          var result = params[0].name+"</br>";
+
+
+
+                    params.forEach(function (item) {
+
+
+
+                        result += item.marker + " " + item.seriesName + " : " + item.value +"</br>";
+
+
+
+                    });
+
+
+
+                    return result;
+
+
+
+        },
+
+
+
+        },
+
+
+
+        dataZoom:[
+
+
+
+          {
+
+
+
+            type: 'slider',
+
+
+
+            start: 0,
+
+
+
+            end: 100
+
+
+
+          },
+
+
+
+          {
+
+
+
+            type: 'inside',
+
+
+
+            start: 0,
+
+
+
+            end: 100
+
+
+
+          }
+
+
+
+        ],
+
+
+
+        xAxis: {
+
+
+
+          data: []
+
+
+
+        },
+
+
+
+        yAxis: {
+
+
+
+
+
+
+
+        }
+
+
+
+      };
+
+
+
+		myChart.setOption(option);
+
+
+
+	
+
+
+
+		
+
+
+
+		}
+
+
+
+		
+
+
+
+    </script>
+<span style="align-self: center;">
+</span>
+</body>
+</html>

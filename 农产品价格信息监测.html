@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<style type="text/css">
+
+
+
+.description {
+
+
+
+	font-family:"Microsoft YaHei";
+
+
+
+	/*font-weight:bold;*/
+
+
+
+	font-size:15px;
+
+
+
+	text-align: left; /*--@ center @--*/
+
+
+
+	padding-top: 10px;
+
+
+
+	padding-left: 10%;  /*--@ 20px @--*/
+
+
+
+}
+
+
+
+div.words {
+
+
+
+	color:#1d1d1d;
+
+
+
+	border-color: #b6b6b6;
+
+
+
+	border-width: 1px;
+
+
+
+	border-bottom-style: solid;
+
+
+
+}
+
+
+
+#main {
+
+
+
+	font-family: Arial,"Microsoft YaHei";
+
+
+
+	width:1800px;
+
+
+
+	height:800px;
+
+
+
+}
+
+
+
+</style>
+<title>农产品价格信息监测</title><script src="肥猪.js"></script><script src="仔猪.js"></script><script src="鸡蛋.js"></script><script src="甘蔗.js"></script><script src="红枣.js"></script><script src="核桃.js"></script><script src="黄元帅苹果.js"></script><script src="黄香蕉苹果.js"></script><script src="秦冠苹果.js"></script><script src="红星苹果.js"></script><script src="富士苹果.js"></script><script src="国光苹果.js"></script><script src="生姜.js"></script><script src="大蒜.js"></script><script src="蒜薹.js"></script><script src="辣椒干.js"></script><script src="一级豆油散装.js"></script><script src="菜油散装.js"></script><script src="粳米普通.js"></script><script src="花生.js"></script><script src="棕榈油.js"></script><script src="大豆.js"></script><script src="玉米.js"></script>
+<!-- 引入 echarts.js -->
+<script crossorigin="anonymous" integrity="sha384-et+fqdf7kslHL5Ip8rXSJPUPODLa7eMfpFTBaCfnlMzrcAz/wxI5Xm/mNTZwd+7H" src="https://lib.baomitu.com/echarts/4.7.0/echarts.min.js"></script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<body>
+<div id="main"></div>
+<script type="text/javascript">
+
+
+
+		// 基于准备好的dom，初始化echarts实例
+
+
+
+      var myChart = echarts.init(document.getElementById('main'));
+
+
+
+      // 指定图表的配置项和数据
+
+
+
+      var option = {
+
+
+
+        title: {
+
+
+
+          text: '',
+
+
+
+        },
+
+
+
+        legend: {
+
+
+
+          orient: 'vertical',
+
+
+
+          right: 10,
+
+
+
+          top: 'center'
+
+
+
+        },
+
+
+
+        tooltip: {
+
+
+
+        trigger: 'axis',
+
+
+
+        axisPointer: {
+
+
+
+            type: 'shadow'
+
+
+
+        },
+
+
+
+        formatter: function (params) {
+
+
+
+          var result = params[0].name+"</br>";
+
+
+
+                    params.forEach(function (item) {
+
+
+
+                        result += item.marker + " " + item.seriesName + " : " + item.value +"</br>";
+
+
+
+                    });
+
+
+
+                    return result;
+
+
+
+        },
+
+
+
+        },
+
+
+
+        dataZoom:[
+
+
+
+          {
+
+
+
+            type: 'slider',
+
+
+
+            start: 0,
+
+
+
+            end: 100
+
+
+
+          },
+
+
+
+          {
+
+
+
+            type: 'inside',
+
+
+
+            start: 0,
+
+
+
+            end: 100
+
+
+
+          }
+
+
+
+        ],
+
+
+
+        xAxis: {
+
+
+
+          data: []
+
+
+
+        },
+
+
+
+        yAxis: {
+
+
+
+
+
+
+
+        }
+
+
+
+      };
+
+
+
+      // 使用刚指定的配置项和数据显示图表。
+
+
+
+      myChart.setOption(option);
+
+
+
+      //清空数据重建
+
+
+
+	  function clear_axis(){
+
+
+
+		myChart.clear();
+
+
+
+		option = {
+
+
+
+        title: {
+
+
+
+          text: '',
+
+
+
+        },
+
+
+
+        legend: {
+
+
+
+          orient: 'vertical',
+
+
+
+          right: 10,
+
+
+
+          top: 'center'
+
+
+
+        },
+
+
+
+        tooltip: {
+
+
+
+        trigger: 'axis',
+
+
+
+        axisPointer: {
+
+
+
+            type: 'shadow'
+
+
+
+        },
+
+
+
+        formatter: function (params) {
+
+
+
+          var result = params[0].name+"</br>";
+
+
+
+                    params.forEach(function (item) {
+
+
+
+                        result += item.marker + " " + item.seriesName + " : " + item.value +"</br>";
+
+
+
+                    });
+
+
+
+                    return result;
+
+
+
+        },
+
+
+
+        },
+
+
+
+        dataZoom:[
+
+
+
+          {
+
+
+
+            type: 'slider',
+
+
+
+            start: 0,
+
+
+
+            end: 100
+
+
+
+          },
+
+
+
+          {
+
+
+
+            type: 'inside',
+
+
+
+            start: 0,
+
+
+
+            end: 100
+
+
+
+          }
+
+
+
+        ],
+
+
+
+        xAxis: {
+
+
+
+          data: []
+
+
+
+        },
+
+
+
+        yAxis: {
+
+
+
+
+
+
+
+        }
+
+
+
+      };
+
+
+
+		myChart.setOption(option);
+
+
+
+	
+
+
+
+		
+
+
+
+		}
+
+
+
+		
+
+
+
+    </script>
+<span style="align-self: center;">
+<button onclick="clear_axis();yumi()">玉米</button><button onclick="clear_axis();dadou()">大豆</button><button onclick="clear_axis();zonglvyou()">棕榈油</button><button onclick="clear_axis();huasheng()">花生</button><button onclick="clear_axis();jingmiputong()">粳米普通</button><button onclick="clear_axis();caiyousanzhuang()">菜油散装</button><button onclick="clear_axis();yijidouyousanzhuang()">一级豆油散装</button><button onclick="clear_axis();lajiaogan()">辣椒干</button><button onclick="clear_axis();suantai()">蒜薹</button><button onclick="clear_axis();dasuan()">大蒜</button><button onclick="clear_axis();shengjiang()">生姜</button><button onclick="clear_axis();guoguangpingguo()">国光苹果</button><button onclick="clear_axis();fushipingguo()">富士苹果</button><button onclick="clear_axis();hongxingpingguo()">红星苹果</button><button onclick="clear_axis();qinguanpingguo()">秦冠苹果</button><button onclick="clear_axis();huangxiangjiaopingguo()">黄香蕉苹果</button><button onclick="clear_axis();huangyuanshuaipingguo()">黄元帅苹果</button><button onclick="clear_axis();hetao()">核桃</button><button onclick="clear_axis();hongzao()">红枣</button><button onclick="clear_axis();ganzhe()">甘蔗</button><button onclick="clear_axis();jidan()">鸡蛋</button><button onclick="clear_axis();zizhu()">仔猪</button><button onclick="clear_axis();feizhu()">肥猪</button></span>
+</body>
+</html>
