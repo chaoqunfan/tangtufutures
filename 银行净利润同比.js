@@ -1,0 +1,1 @@
+function yinhangjingliruntongbi(){myChart.setOption({"title": {"text": "银行净利润同比"}, "xAxis": {"data": ["2018-12-31", "2019-12-31", "2020-12-31", "2021-12-31"]}, "series": []});}
